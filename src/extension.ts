@@ -1,29 +1,42 @@
 'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as parser from './parser/parser'
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+var lenguages:Array<string>;
+var currentParser:parser.IParser;
+
 export function activate(context: vscode.ExtensionContext) {
-
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
+    //TODO load languages from config**************
+    //TODO check of current language
+    lenguages = ["haxe"];
+    //***************/
     console.log('Congratulations, your extension "code-outline" is now active!');
+    
+    vscode.workspace.onDidOpenTextDocument(onOpenDocument);
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
-        // The code you place here will be executed every time your command is executed
+    vscode.workspace.onDidChangeTextDocument(onChangeDocument);
 
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
-    });
-
-    context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
+function onOpenDocument(e:vscode.TextDocument):void {
+    if(checkAvailableLanguage(e.languageId)) {
+        initParser(e.languageId);
+    }
+}
+
+function onChangeDocument(e:vscode.TextDocumentChangeEvent):void {
+    console.log("doc is changed");
+    console.log(e);
+}
+
+function initParser(languageId:string):void {
+    currentParser = parser.Parser.getParser(languageId);
+}
+
+function checkAvailableLanguage(languageId:string):Boolean {
+    return lenguages.indexOf(languageId) != -1;
+}
+
 export function deactivate() {
+    console.log('Congratulations, your extension "code-outline" is now deactive!');
 }

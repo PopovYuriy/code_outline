@@ -10,7 +10,7 @@ export interface IParser {
 export class Parser {
     public static getParser(lanID:string) : IParser {
         switch (lanID) {
-            case 'hx' : return new HaxeParser();
+            case 'haxe' : return new HaxeParser();
         }
 
         return null;
@@ -44,6 +44,6 @@ class BaseParser implements IParser {
 class HaxeParser extends BaseParser {
     
     parse(lines:Array<string>):void {
-
+        
     }
 }

@@ -11,14 +11,22 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onView:outline"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [{
             "command": "extension.sayHello",
             "title": "Hello World"
-        }]
+        }],
+        "views": {
+            "explorer": [
+                {
+                    "id": "outline",
+                    "name": "CODE OUTLINE"
+                }
+            ]
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
@@ -26,6 +34,10 @@
         "watch": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/PopovYuriy/code_outline.git"
     },
     "devDependencies": {
         "typescript": "^2.5.2",
