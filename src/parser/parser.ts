@@ -1,13 +1,9 @@
 
-import  * as group from "./data/group";
-
 export interface IParser {
-    getGroups():Array<group.Group>;
-    getGroupByName(name:string):group.Group;
-    parse(lines:Array<string>):void;
+    parseToJSON(lines:Array<string>):object;
 }
 
-export class Parser {
+export class ParserFactory {
     public static getParser(lanID:string) : IParser {
         switch (lanID) {
             case 'haxe' : return new HaxeParser();
@@ -19,31 +15,40 @@ export class Parser {
 }
 
 class BaseParser implements IParser {
-    protected _groups:Array<group.Group>;
-    
-    constructor() {
-        this._groups = new Array();
+
+    parseToJSON(lines:Array<string>):object{
+        return {};
     }
 
-    getGroups():Array<group.Group> {
-        return this._groups;
-    }
-
-    getGroupByName(name:string):group.Group {
-        for (var i = 0; i < this._groups.length; i++) {
-            if(this._groups[i].title == name) return this._groups[i];
-        }
-        return null;
-    }
-
-    parse(lines:Array<string>):void{
-
+    protected getSignatur(text:string):object {
+        return {};
     }
 }
 
 class HaxeParser extends BaseParser {
     
-    parse(lines:Array<string>):void {
-        
+    parseToJSON(lines:Array<string>):object {
+        let result:object = {};
+
+        for (var i = 0; i < lines.length; i++) {
+            var line:string = lines[i];
+            
+            
+        }
+
+        return result;
     }
+
+    protected getSignatur(text:string):object {
+        var result:object = {};
+        var index:number = text.indexOf('class');
+        if(index != -1) {
+            //result
+        }
+        return result;
+    }
+}
+
+class Node {
+
 }
