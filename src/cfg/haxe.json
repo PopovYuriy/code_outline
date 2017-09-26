@@ -1,8 +1,8 @@
 {
-    "nestingDef":"2",
+    "nestingDepth":"2",
     "groupList": {
-        "0":"typedef",
-        "1":"import",
+        "0":"import",
+        "1":"typedef",
         "2":"functions",
         "3":"variables",
         "4":"constants",
@@ -13,7 +13,7 @@
             {
                 "regexp":"^(?=import\\s)\\A\\Z(?=\\;)",
                 "type":"item",
-                "icon":"class",
+                "icon":"import",
                 "groupId":"1"
             }
         ]
